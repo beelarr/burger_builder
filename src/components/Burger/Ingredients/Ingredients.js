@@ -6,7 +6,7 @@ class Ingredient extends Component {
     render () {
         let singleIngredient = null;
 
-        switch (this.prop.type) {
+        switch (this.props.type) {
             case('bread-bottom'):
                 singleIngredient = <div className={styles.BreadBottom}/>;
                 break;
