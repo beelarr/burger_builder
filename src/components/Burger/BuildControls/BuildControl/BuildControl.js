@@ -13,6 +13,7 @@ const buildControl = props => (
         <button
             className={styles.Less}
             onClick={props.removed}
+            disabled={props.disabled}
         >Less</button>
     </div>
 );
