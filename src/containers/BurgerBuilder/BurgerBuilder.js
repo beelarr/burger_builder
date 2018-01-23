@@ -5,7 +5,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
 const INGREDIENT_PRICES = {
-    salad: 0.5,
+    lettuce: .5,
     cheese: .75,
     meat: 2.5,
     bacon: 1.3
@@ -64,8 +64,11 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aux style>
-                <Burger ingredients={this.state.ingredients} />
+                <Burger
+                    ingredients={this.state.ingredients}
+                />
                 <BuildControls
+                    price={this.state.totalPrice}
                     addIngredient={this.addIngredientHandler}
                     removeIngredient={this.removeIngredientHandler}
                     disabled={disabledInfo}
