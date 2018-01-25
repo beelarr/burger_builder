@@ -30,11 +30,13 @@ class BurgerBuilder extends Component {
         toBePurchased: false,
         showModal: false,
         loading: false,
+        error: null
     };
 
     componentDidMount () {
       axios.get('https://burgerbuilder-beelarr.firebaseio.com/ingredients.json')
           .then(response => this.setState({ ingredients: { ...response.data } }))
+          .catch(error => this.setState({ error: error.message }))
     };
 
     updateToBePurchased = (ingredients) => {
@@ -125,7 +127,7 @@ class BurgerBuilder extends Component {
             //sets this version of state from a number to true or false for disabling buttons
         }
 
-        let burger = <Spinner/>
+        let burger = this.state.error ? `Ingredient can't be loaded because of: ${this.state.error}` : <Spinner/>;
 
         if (this.state.ingredients)
             burger = (
