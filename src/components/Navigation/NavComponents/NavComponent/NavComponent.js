@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from 'NavComponent.css';
+import styles from './NavComponent.css';
 
 const navComponent = props => (
     <li className={styles.NavComponent}>

@@ -5,7 +5,9 @@ import NavComponent from './NavComponent/NavComponent';
 
 const navComponents = props => (
     <ul className={styles.NavComponents}>
-        <NavComponent />
+        <NavComponent link="/" active >Burger Builder</NavComponent>
+        <NavComponent link="/">Checkout</NavComponent>
+
     </ul>
 );
 
