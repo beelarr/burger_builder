@@ -25,7 +25,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 <Aux>
                     <Modal
                         show={this.state.error}
-                        clicked={this.errorConfirmed}
+                        closeModal={this.errorConfirmed}
                     >
                         It's broke. . . 😵. Probably something to do with:
                         {this.state.error ? this.state.error.message : null}
