@@ -1,0 +1,26 @@
+.NavComponent {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    margin: 0;
+
+}
+
+.NavComponent a {
+    border-bottom: 4px solid transparent;
+    box-sizing: border-box;
+    color: white;
+    display: block;
+    height: 100%;
+    padding: 16px 10px;
+    text-decoration: none;
+}
+
+.NavComponent a:hover,
+.NavComponent a:active,
+.NavComponent a.active {
+    border-bottom: 4px solid #40A4C8;
+    background-color: #8F5C2C;
+    color: white;
+}
