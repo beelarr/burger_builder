@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import styles from './Modal.css';
 import Backdrop from '../Backdrop/Backdrop';
-import Aux from '../../../hoc/Aux';
+import Aux from '../../../hoc/Aux/Aux';
 
 
 class Modal extends Component {
