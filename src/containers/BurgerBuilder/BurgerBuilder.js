@@ -101,12 +101,11 @@ class BurgerBuilder extends Component {
                 this.setState({loading:false, showModal: false})
             })
             .catch(error => {
-                console.log(error.message);
+                alert(`Nope, that didn't work.  We think it was ${error.message}`)
                 this.setState({loading:false, showModal: false})
 
             })
 
-        // alert('You have continued!!')
 
     };
 
