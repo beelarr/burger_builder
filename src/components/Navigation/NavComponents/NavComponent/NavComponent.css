@@ -1,26 +1,49 @@
 .NavComponent {
-    align-items: center;
     box-sizing: border-box;
-    display: flex;
-    height: 100%;
-    margin: 0;
+    display: block;
+    margin: 2% 0;
+    width: 100%
 
 }
 
 .NavComponent a {
-    border-bottom: 4px solid transparent;
     box-sizing: border-box;
-    color: white;
+    color: #8F5C2C;
     display: block;
-    height: 100%;
-    padding: 16px 10px;
     text-decoration: none;
+    width: 100%
 }
 
 .NavComponent a:hover,
 .NavComponent a:active,
 .NavComponent a.active {
-    border-bottom: 4px solid #40A4C8;
-    background-color: #8F5C2C;
-    color: white;
+    color: #40A4C8;
+}
+
+
+@media (min-width: 500px) {
+    .NavComponent {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        margin: 0;
+        width: auto;
+
+    }
+
+    .NavComponent a {
+        border-bottom: 4px solid transparent;
+        color: white;
+        height: 100%;
+        padding: 16px 10px;
+    }
+
+    .NavComponent a:hover,
+    .NavComponent a:active,
+    .NavComponent a.active {
+        border-bottom: 4px solid #40A4C8;
+        background-color: #8F5C2C;
+        color: white;
+    }
+
 }
