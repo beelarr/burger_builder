@@ -21,6 +21,7 @@ const sideDrawer = props => {
                 <div className={styles.Logo}>
                     <Logo />
                 </div>
+                <hr/>
                 <nav>
                     <NavComponents/>
                 </nav>

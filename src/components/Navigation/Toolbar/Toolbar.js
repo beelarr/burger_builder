@@ -6,7 +6,17 @@ import NavigationComponents from '../NavComponents/NavComponents';
 
 const toolbar = props => (
     <header className={styles.Toolbar}>
-        <div>MENU</div>
+        <div
+            style={{
+                color: 'white',
+                cursor: 'pointer'
+            }}
+            className={styles.DrawerToggle}
+            onClick={props.open}>
+            <div className={styles.DrawerToggleInner}></div>
+            <div className={styles.DrawerToggleInner}></div>
+            <div className={styles.DrawerToggleInner}></div>
+        </div>
         <div className={styles.Logo}>
             <Logo />
         </div>
