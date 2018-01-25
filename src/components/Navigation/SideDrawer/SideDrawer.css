@@ -9,11 +9,11 @@
     background-color: white;
     padding: 2% 1%;
     box-sizing: border-box;
-    -webkit-transition: transform 3s ease-out;
-    -moz-transition: transform 3s ease-out;
-    -ms-transition: transform 3s ease-out;
-    -o-transition: transform 3s ease-out;
-    transition: transform 3s ease-out;
+    -webkit-transition: transform .3s ease-out;
+    -moz-transition: transform .3s ease-out;
+    -ms-transition: transform .3s ease-out;
+    -o-transition: transform .3s ease-out;
+    transition: transform .3s ease-out;
 
 }
 

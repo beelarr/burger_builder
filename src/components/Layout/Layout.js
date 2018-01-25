@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Aux';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import PropTypes from 'prop-types';
 
 
 import classes from './Layout.css';
@@ -39,6 +40,9 @@ class Layout extends Component {
     }
 }
 
-
+Layout.propTypes = {
+    open: PropTypes.bool,
+    closed: PropTypes.bool,
+}
 
 export default Layout;
