@@ -8,7 +8,8 @@ import Aux from '../../../hoc/Aux/Aux';
 class Modal extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.show !== this.props.show;  //Keeps from updating order summary in modal when modal is hidden.
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
+        //Keeps from updating order summary in modal when modal is hidden.
         };
 
     componentWillUpdate() {
