@@ -5,19 +5,31 @@ import Backdrop from '../Backdrop/Backdrop';
 import Aux from '../../../hoc/Aux';
 
 
-const modal = props => (
-    <Aux>
-        <Backdrop show={props.show} clicked={props.closeModal} />
-            <div
-                className={styles.Modal}
-                style={{
-                    transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
-                    opacity: props.show ? '1' : '0'
-                }}
-            >
-                {props.children}
-            </div>
-    </Aux>
-);
+class Modal extends Component {
 
-export default modal;
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.show !== this.props.show;  //Keeps from updating order summary in modal when modal is hidden.
+        };
+
+    componentWillUpdate() {
+        console.log('MODAL Will Updated');
+    }
+
+    render() {
+        return (
+            <Aux>
+                <Backdrop show={this.props.show} clicked={this.props.closeModal}/>
+                <div
+                    className={styles.Modal}
+                    style={{
+                        transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                        opacity: this.props.show ? '1' : '0'
+                    }}
+                >
+                    {this.props.children}
+                </div>
+            </Aux>
+        )
+    }
+}
+export default Modal;
