@@ -120,34 +120,45 @@ class BurgerBuilder extends Component {
             ...this.state.ingredients
         };
 
-        for (let key in disabledInfo){
+        for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
             //sets this version of state from a number to true or false for disabling buttons
         }
+
+        let burger = <Spinner/>
+
+        if (this.state.ingredients)
+            burger = (
+                <Aux>
+                    <Burger
+                        ingredients={this.state.ingredients}
+                    />
+                    <BuildControls
+                        price={this.state.totalPrice}
+                        addIngredient={this.addIngredientHandler}
+                        removeIngredient={this.removeIngredientHandler}
+                        disabled={disabledInfo}
+                        toBePurchased={this.state.toBePurchased}
+                        showModal={this.showModal}
+                    />
+                </Aux>
+            );
+
 
 
 
         return (
             <Aux>
                 <Modal show={this.state.showModal} closeModal={this.closeModal}>
-                    { this.state.loading ? <Spinner /> : (
+
+                    { this.state.loading || !this.state.ingredients ? <Spinner /> : (
                     <OrderSummary
                         ingredients={this.state.ingredients}
                         cancel={this.closeModal}
                         continue={this.continuePurchase}
                         totalPrice={this.state.totalPrice}/> ) }
                 </Modal>
-                <Burger
-                    ingredients={this.state.ingredients}
-                />
-                <BuildControls
-                    price={this.state.totalPrice}
-                    addIngredient={this.addIngredientHandler}
-                    removeIngredient={this.removeIngredientHandler}
-                    disabled={disabledInfo}
-                    toBePurchased={this.state.toBePurchased}
-                    showModal={this.showModal}
-                />
+                {burger}
             </Aux>
         )
     }
