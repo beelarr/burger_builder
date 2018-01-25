@@ -12,9 +12,7 @@ class Modal extends Component {
         //Keeps from updating order summary in modal when modal is hidden.
         };
 
-    componentWillUpdate() {
-        console.log('MODAL Will Updated');
-    }
+
 
     render() {
         return (
