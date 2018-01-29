@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
 import styles from './CheckoutData.css'
 import axios from '../../../axios-orders';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 
 class CheckoutData extends Component {
@@ -46,7 +47,8 @@ class CheckoutData extends Component {
             axios.post('/orders.json', order)
                 .then(data => {
                     console.log(data);
-                    this.setState({loading:false})
+                    this.setState({loading:false});
+                    this.props.history.push('/')
                 })
                 .catch(error => {
                     alert(`Nope, that didn't work.  We think it was ${error.message}`);
@@ -58,21 +60,25 @@ class CheckoutData extends Component {
 
 
     render() {
+        console.log('props ckout data', this.props);
         return (
             <div className={styles.ContactData}>
                 <h4>Enter Your Contact Info</h4>
                 <hr/>
-                <form action="">
-                    <input type="text" name="name" placeholder="Your Name"/>
-                    <input type="number" name="street-number" placeholder="Your Street Number"/>
-                    <input type="text" name="street" placeholder="Your Street"/>
-                    <input type="text" name="state" maxLength="2" placeholder="Your State"/>
-                    <input type="number" name="zip code" placeholder="Zip Code"/>
-                    <input type="email" name="email" placeholder="Your Email"/>
-                    <input type="text" name="delivery" placeholder="Preferred Delivery Method"/>
-                    <br/>
-                    <Button click={this.orderHandler} btnType="Success">ORDER</Button>
-                </form>
+                {this.state.loading ? <Spinner/> : (
+                    <form action="">
+                        <input type="text" name="name" placeholder="Your Name"/>
+                        <input type="number" name="street-number" placeholder="Your Street Number"/>
+                        <input type="text" name="street" placeholder="Your Street"/>
+                        <input type="text" name="state" maxLength="2" placeholder="Your State"/>
+                        <input type="number" name="zip code" placeholder="Zip Code"/>
+                        <input type="email" name="email" placeholder="Your Email"/>
+                        <input type="text" name="delivery" placeholder="Preferred Delivery Method"/>
+                        <br/>
+                        <Button click={this.orderHandler} btnType="Success">ORDER</Button>
+                    </form>
+
+                )}
 
             </div>
         )
