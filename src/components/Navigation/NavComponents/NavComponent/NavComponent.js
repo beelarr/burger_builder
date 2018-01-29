@@ -4,7 +4,12 @@ import { NavLink } from 'react-router-dom';
 
 const navComponent = props => (
     <li className={styles.NavComponent}>
-        <NavLink to={props.link}>{props.children}</NavLink>
+        <NavLink
+            to={props.link}
+            exact={props.exact}// keeps active class from being applied to all
+            activeClassName={styles.active}
+
+        >{props.children}</NavLink>
     </li>
 );
 
