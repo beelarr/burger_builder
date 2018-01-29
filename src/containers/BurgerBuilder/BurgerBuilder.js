@@ -85,36 +85,37 @@ class BurgerBuilder extends Component {
     };
 
     continuePurchase = () => {
-        this.setState({loading: true});
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Bryon Larrance',
-                address: {
-                    street_name: 'Sunnymeade Drive',
-                    street_number: '1108',
-                    city: 'Nashville',
-                    zip_code: '37216',
-                    country: 'USA'
-                },
-                email: 'bryonl@me.com'
-            },
-            delivery_method: 'priority'
-        };
+        // this.setState({loading: true});
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Bryon Larrance',
+        //         address: {
+        //             street_name: 'Sunnymeade Drive',
+        //             street_number: '1108',
+        //             city: 'Nashville',
+        //             zip_code: '37216',
+        //             country: 'USA'
+        //         },
+        //         email: 'bryonl@me.com'
+        //     },
+        //     delivery_method: 'priority'
+        // };
 
-        axios.post('/orders.json', order)
-            .then(data => {
-                console.log(data);
-                this.setState({loading:false, showModal: false})
-            })
-            .catch(error => {
-                alert(`Nope, that didn't work.  We think it was ${error.message}`);
-                this.setState({loading:false, showModal: false})
-
-            })
-
-
+    //     axios.post('/orders.json', order)
+    //         .then(data => {
+    //             console.log(data);
+    //             this.setState({loading:false, showModal: false})
+    //         })
+    //         .catch(error => {
+    //             alert(`Nope, that didn't work.  We think it was ${error.message}`);
+    //             this.setState({loading:false, showModal: false})
+    //
+    //         })
+    //
+    //
+        this.props.history.push('/checkout');
     };
 
     render() {
