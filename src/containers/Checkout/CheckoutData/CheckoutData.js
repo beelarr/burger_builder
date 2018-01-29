@@ -25,6 +25,7 @@ class CheckoutData extends Component {
         return (
             <div className={styles.ContactData}>
                 <h4>Enter Your Contact Info</h4>
+                <hr/>
                 <form action="">
                     <input type="text" name="name" placeholder="Your Name"/>
                     <input type="number" name="street-number" placeholder="Your Street Number"/>
