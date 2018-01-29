@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Button from '../../../components/UI/Button/Button';
 import styles from './CheckoutData.css'
+import axios from '../../../axios-orders';
+
 
 class CheckoutData extends Component {
     state = {
@@ -15,8 +17,42 @@ class CheckoutData extends Component {
                     },
                     email: ''
                 },
-                delivery_method: ''
+                delivery_method: '',
+        loading: false,
 
+
+    };
+
+    orderHandler = (e) => {
+        e.preventDefault();
+        this.setState({loading: true});
+        const order = {
+            ingredients: this.props.ingredients,
+            price: this.props.price,
+            customer: {
+                name: 'Bryon Larrance',
+                address: {
+                    street_name: 'Sunnymeade Drive',
+                    street_number: '1108',
+                    city: 'Nashville',
+                    zip_code: '37216',
+                    state: 'TN'
+                },
+                email: 'bryonl@me.com'
+            },
+            delivery_method: 'priority'
+        };
+
+            axios.post('/orders.json', order)
+                .then(data => {
+                    console.log(data);
+                    this.setState({loading:false})
+                })
+                .catch(error => {
+                    alert(`Nope, that didn't work.  We think it was ${error.message}`);
+                    this.setState({loading:false})
+
+                })
     };
 
 
@@ -35,7 +71,7 @@ class CheckoutData extends Component {
                     <input type="email" name="email" placeholder="Your Email"/>
                     <input type="text" name="delivery" placeholder="Preferred Delivery Method"/>
                     <br/>
-                    <Button btnType="Success">ORDER</Button>
+                    <Button click={this.orderHandler} btnType="Success">ORDER</Button>
                 </form>
 
             </div>
