@@ -14,17 +14,16 @@ const checkoutSummary = props => {
                 margin: 'auto'
             }}>
                 <Burger ingredients={props.ingredients}/>
-                <Button />
             </div>
             <Button
                 btnType="Danger"
-                clicked
+                click={props.checkoutCancelled}
             >
                 CANCEL
             </Button>
             <Button
                 btnType="Success"
-                clicked
+                click={props.checkoutContinued}
             >
                 CONTINUE
             </Button>
