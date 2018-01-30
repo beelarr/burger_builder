@@ -109,19 +109,29 @@ class CheckoutData extends Component {
 
 
     render() {
-        console.log('props ckout data', this.props);
+        const formElementArray = [];
+        for (let key in this.state.orderForm){
+            formElementArray.push({
+                id: key,
+                config: this.state.orderForm[key]
+            })
+        }
+        console.log('formElementArray', formElementArray);
+
         return (
             <div className={styles.ContactData}>
                 <h4>Enter Your Contact Info</h4>
                 <hr/>
                 {this.state.loading ? <Spinner/> : (
                     <form action="">
-                        <Input elementType="" elementConfig="" value="" />
-                        <Input elementType="" elementConfig="" value="" />
-                        <Input elementType="" elementConfig="" value="" />
-                        <Input elementType="" elementConfig="" value="" />
-                        <Input elementType="" elementConfig="" value="" />
-                        <Input elementType="" elementConfig="" value="" />
+                        {formElementArray.map(element => (
+                            <Input
+                                key={element.id}
+                                elementType={element.config.elementType}
+                                elementConfig={element.config.elementConfig}
+                                value={element.config.elementConfig.placeholder}
+                            />
+                        ))}
                         <br/>
                         <Button click={this.orderHandler} btnType="Success">ORDER</Button>
                     </form>
