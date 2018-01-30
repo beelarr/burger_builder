@@ -8,27 +8,42 @@ const input = props => {
 
     switch (props.elementType){
         case('input'):
-            inputElement = <input className={styles.InputElement} {...props.elementConfig} value={props.value} />;
+            inputElement = ( <input
+                                onChange={props.changed}
+                                className={styles.InputElement}
+                                {...props.elementConfig}
+                                placeholder={props.value} />
+            );
             break;
         case('textarea'):
-            inputElement = <textarea className={styles.InputElement} {...props.elementConfig} value={props.value} />;
+            inputElement = ( <textarea
+                                onChange={props.changed}
+                                className={styles.InputElement}
+                                {...props.elementConfig}
+                                placeholder={props.value} />
+            );
             break;
         case('select'):
             inputElement =  ( <select
+                                onChange={props.changed}
                                 className={styles.InputElement}
-                                value={props.value}
-                                >
-                            {props.elementConfig.options.map(option => (
-                                <option
-                                    value={option.value}
-                                    key={option.value}
-                                >{option.displayValue}</option>
-                            ))}
+                                placeholder={props.value}>
+                                    {props.elementConfig.options.map(option => (
+                                        <option
+                                            value={option.value}
+                                            key={option.value}
+                                        >{option.displayValue}</option>
+                                    ))}
                             </select> );
             break;
         default:
-            inputElement = <input className={styles.InputElement} {...props.elementConfig} value={props.value} />
-    }
+            inputElement = ( <input
+                                onChange={props.changed}
+                                className={styles.InputElement}
+                                {...props.elementConfig}
+                                placeholder={props.value} />
+            )
+    };
 
     return (
 

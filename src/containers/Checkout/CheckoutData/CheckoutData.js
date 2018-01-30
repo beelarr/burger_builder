@@ -106,7 +106,13 @@ class CheckoutData extends Component {
                 })
     };
 
-
+    inputChangeHandler = (event, inputIdentifier) =>{
+        const updateForm = { ...this.state.orderForm };
+        const updateFormElement = { ...updateForm[inputIdentifier] };
+        updateFormElement.value = event.target.value;
+        updateForm[inputIdentifier] = updateFormElement
+        this.setState({orderForm: updateForm})
+    };
 
     render() {
         const formElementArray = [];
@@ -130,6 +136,7 @@ class CheckoutData extends Component {
                                 elementType={element.config.elementType}
                                 elementConfig={element.config.elementConfig}
                                 value={element.config.elementConfig.placeholder}
+                                changed={event => this.inputChangeHandler(event, element.id)}
                             />
                         ))}
                         <br/>
