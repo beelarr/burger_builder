@@ -9,21 +9,68 @@ import Input from '../../../components/UI/Input/Input';
 
 class CheckoutData extends Component {
     state = {
-        customer: {
-                    name: '',
-                    address: {
-                        street_name: '',
-                        street_number: '',
-                        city: '',
-                        zip_code: '',
-                        state: ''
-                    },
-                    email: ''
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name'
                 },
-                delivery_method: '',
+            },
+
+            address: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Address'
+                },
+
+            },
+            city: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your City'
+                },
+            },
+            zip_code: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'number',
+                    placeholder: 'Your Zip Code'
+                },
+            },
+            state: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your State'
+                },
+            },
+            email: {
+                elementType: 'email',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Email'
+                },
+            },
+            delivery_method: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {
+                            value: 'standard', displayValue: 'Standard'
+                        },
+                        {
+                            value: 'priority', displayValue: 'Priority'
+                        },
+                        {
+                            value: 'free', displayValue: 'Free'
+                        }]
+                },
+            },
+        },
         loading: false,
-
-
     };
 
     orderHandler = (e) => {
