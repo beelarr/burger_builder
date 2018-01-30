@@ -4,6 +4,8 @@ import styles from './CheckoutData.css'
 import axios from '../../../axios-orders';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
+import Input from '../../../components/UI/Input/Input';
+
 
 class CheckoutData extends Component {
     state = {
@@ -67,13 +69,13 @@ class CheckoutData extends Component {
                 <hr/>
                 {this.state.loading ? <Spinner/> : (
                     <form action="">
-                        <input type="text" name="name" placeholder="Your Name"/>
-                        <input type="number" name="street-number" placeholder="Your Street Number"/>
-                        <input type="text" name="street" placeholder="Your Street"/>
-                        <input type="text" name="state" maxLength="2" placeholder="Your State"/>
-                        <input type="number" name="zip code" placeholder="Zip Code"/>
-                        <input type="email" name="email" placeholder="Your Email"/>
-                        <input type="text" name="delivery" placeholder="Preferred Delivery Method"/>
+                        <Input type="text" name="name" placeholder="Your Name"/>
+                        <Input type="number" name="street-number" placeholder="Your Street Number"/>
+                        <Input type="text" name="street" placeholder="Your Street"/>
+                        <Input type="text" name="state" maxLength="2" placeholder="Your State"/>
+                        <Input type="number" name="zip code" placeholder="Zip Code"/>
+                        <Input type="email" name="email" placeholder="Your Email"/>
+                        <Input type="text" name="delivery" placeholder="Preferred Delivery Method"/>
                         <br/>
                         <Button click={this.orderHandler} btnType="Success">ORDER</Button>
                     </form>
