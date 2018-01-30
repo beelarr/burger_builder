@@ -16,6 +16,11 @@ class CheckoutData extends Component {
                     type: 'text',
                     placeholder: 'Your Name'
                 },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
 
             address: {
@@ -24,6 +29,11 @@ class CheckoutData extends Component {
                     type: 'text',
                     placeholder: 'Your Address'
                 },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
 
             },
             city: {
@@ -32,6 +42,11 @@ class CheckoutData extends Component {
                     type: 'text',
                     placeholder: 'Your City'
                 },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             zip_code: {
                 elementType: 'input',
@@ -39,6 +54,13 @@ class CheckoutData extends Component {
                     type: 'number',
                     placeholder: 'Your Zip Code'
                 },
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 5,
+                    maxLength: 5
+                },
+                valid: false
             },
             state: {
                 elementType: 'input',
@@ -46,6 +68,11 @@ class CheckoutData extends Component {
                     type: 'text',
                     placeholder: 'Your State'
                 },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             email: {
                 elementType: 'email',
@@ -53,6 +80,11 @@ class CheckoutData extends Component {
                     type: 'text',
                     placeholder: 'Your Email'
                 },
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             delivery_method: {
                 elementType: 'select',
@@ -68,6 +100,7 @@ class CheckoutData extends Component {
                             value: 'free', displayValue: 'Free'
                         }]
                 },
+
             },
         },
         loading: false,
@@ -76,21 +109,15 @@ class CheckoutData extends Component {
     orderHandler = (e) => {
         e.preventDefault();
         this.setState({loading: true});
+        const formData = {};
+        for (let key in this.state.orderForm) {
+
+            formData[key] = this.state.orderForm[key].value
+        }
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            customer: {
-                name: 'Bryon Larrance',
-                address: {
-                    street_name: 'Sunnymeade Drive',
-                    street_number: '1108',
-                    city: 'Nashville',
-                    zip_code: '37216',
-                    state: 'TN'
-                },
-                email: 'bryonl@me.com'
-            },
-            delivery_method: 'priority'
+            orderData: formData
         };
 
             axios.post('/orders.json', order)
@@ -106,13 +133,32 @@ class CheckoutData extends Component {
                 })
     };
 
+    validationCheck = (value, rules) => {
+        let isValid = false;
+        if (rules.required) {
+            isValid = value.trim() !== '';
+        }
+        if (rules.minLength) {
+            isValid = value.length >= rules.minLength
+        }
+        if (rules.maxLength) {
+            isValid = value.length <= rules.maxLength
+        }
+
+        return isValid;
+    };
+
     inputChangeHandler = (event, inputIdentifier) =>{
         const updateForm = { ...this.state.orderForm };
         const updateFormElement = { ...updateForm[inputIdentifier] };
         updateFormElement.value = event.target.value;
-        updateForm[inputIdentifier] = updateFormElement
+        updateFormElement.valid = this.validationCheck(updateFormElement.value, updateFormElement.validation);
+        updateForm[inputIdentifier] = updateFormElement;
+        console.log('updated form element', updateFormElement);
         this.setState({orderForm: updateForm})
     };
+
+
 
     render() {
         const formElementArray = [];
@@ -129,7 +175,7 @@ class CheckoutData extends Component {
                 <h4>Enter Your Contact Info</h4>
                 <hr/>
                 {this.state.loading ? <Spinner/> : (
-                    <form action="">
+                    <form onSubmit={this.orderHandler}>
                         {formElementArray.map(element => (
                             <Input
                                 key={element.id}
@@ -140,7 +186,7 @@ class CheckoutData extends Component {
                             />
                         ))}
                         <br/>
-                        <Button click={this.orderHandler} btnType="Success">ORDER</Button>
+                        <Button btnType="Success">ORDER</Button>
                     </form>
 
                 )}
