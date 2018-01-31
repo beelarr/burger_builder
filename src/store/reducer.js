@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
                 ...state,   // doesn't create a deep clone ie. ingredients object points to whatever state is.
                 ingredients: {
                     ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
+                    [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1
                 }
             };
         case actionTypes.DELETE_INGREDIENT:
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ingredients: {
                     ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1
+                    [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1
                 }
 
             };
