@@ -6,9 +6,11 @@ const input = props => {
 
     let inputElement = null;
     const inputClasses = [styles.InputElement];
+    let validationError = null;
 
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(styles.Invalid)
+        validationError = <p style={{color: 'red'}}>We need something that is valid. . .</p>
     }
 
     switch (props.elementType){
@@ -55,6 +57,7 @@ const input = props => {
     <div className={styles.Input} >
         <label className={styles.Label} htmlFor="">{props.label}</label>
         {inputElement}
+        {validationError}
     </div>
 
     )
