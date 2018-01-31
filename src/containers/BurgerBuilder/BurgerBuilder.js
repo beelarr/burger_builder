@@ -13,21 +13,14 @@ import axios from '../../axios-orders';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
 
-const INGREDIENT_PRICES = {
-    lettuce: .5,
-    cheese: .75,
-    meat: 2.5,
-    bacon: 1.3
-};
 
 class BurgerBuilder extends Component {
 
     state = {
-        totalPrice: 1,
         toBePurchased: false,
         showModal: false,
         loading: false,
-        error: null
+        error: false
     };
 
     componentDidMount () {
@@ -43,35 +36,7 @@ class BurgerBuilder extends Component {
 
     };
 
-    addIngredientHandler = type => {
-        const oldCount = this.props.burgerContent[type];
-        const updatedCount = oldCount + 1;
-        const updatedIngredients = {
-            ...this.props.burgerContent
-        };
-        updatedIngredients[type] = updatedCount;  // updates the ingredients
-        const priceAddition = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice + priceAddition;
-        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients})  //new state from updated ingredients
-        this.updateToBePurchased(updatedIngredients);
-    };
 
-    removeIngredientHandler = type => {
-        const oldCount = this.props.burgerContent[type];
-        if (oldCount <= 0){return;}
-        const updatedCount = oldCount - 1;
-        const updatedIngredients = {
-            ...this.props.burgerContent
-        };
-        updatedIngredients[type] = updatedCount;  // updates the ingredients
-        const priceReduction = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice;
-        const newPrice = oldPrice - priceReduction;
-        this.setState({ totalPrice: newPrice, ingredients: updatedIngredients})
-        this.updateToBePurchased(updatedIngredients);
-
-    };
 
     showModal = () => {
         this.setState({showModal: true})
@@ -86,7 +51,7 @@ class BurgerBuilder extends Component {
         for (let i in this.props.burgerContent){
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.burgerContent[i]))
         }
-        queryParams.push('price=' + this.state.totalPrice);
+        queryParams.push('price=' + this.props.price);
         const queryString = queryParams.join('&');
 
         this.props.history.push({
@@ -115,7 +80,7 @@ class BurgerBuilder extends Component {
                         ingredients={this.props.burgerContent}
                     />
                     <BuildControls
-                        price={this.state.totalPrice}
+                        price={this.props.price}
                         addIngredient={this.props.onIngredientAdd}
                         removeIngredient={this.props.onIngredientDelete}
                         disabled={disabledInfo}
@@ -137,7 +102,7 @@ class BurgerBuilder extends Component {
                         ingredients={this.props.burgerContent}
                         cancel={this.closeModal}
                         continue={this.continuePurchase}
-                        totalPrice={this.state.totalPrice}/> ) }
+                        totalPrice={this.props.price}/> ) }
                 </Modal>
                 {burger}
 
@@ -148,22 +113,26 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-      burgerContent: state.ingredients
+      burgerContent: state.ingredients,
+      price: state.totalPrice
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdd: ingredientName => dispatch({
+        onIngredientAdd: (ingredientName, totalPrice) => dispatch({
             type: actionTypes.ADD_INGREDIENT,
             payload: {
-                ingredientName: ingredientName
+                ingredientName: ingredientName,
+                totalPrice: totalPrice
             }
         }),
-        onIngredientDelete: ingredientName => dispatch({
+        onIngredientDelete: (ingredientName, totalPrice) => dispatch({
             type: actionTypes.DELETE_INGREDIENT,
             payload: {
-                ingredientName: ingredientName
+                ingredientName: ingredientName,
+                totalPrice: totalPrice
+
             }
         })
     }
