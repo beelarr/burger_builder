@@ -20,7 +20,7 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
 
     state = {
-        ingredients: null,
+        ingredients: null
         totalPrice: 1,
         toBePurchased: false,
         showModal: false,
@@ -29,9 +29,9 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount () {
-      axios.get('https://burgerbuilder-beelarr.firebaseio.com/ingredients.json')
-          .then(response => this.setState({ ingredients: { ...response.data } }))
-          .catch(error => this.setState({ error: error.message }))
+      // axios.get('https://burgerbuilder-beelarr.firebaseio.com/ingredients.json')
+      //     .then(response => this.setState({ ingredients: { ...response.data } }))
+      //     .catch(error => this.setState({ error: error.message }))
     };
 
     updateToBePurchased = (ingredients) => {
