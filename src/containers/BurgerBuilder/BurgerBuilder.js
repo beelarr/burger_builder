@@ -11,7 +11,7 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
 import { connect } from 'react-redux';
-import * as burgerBuilderActions from '../../store/actions/';
+import * as burgerBuilderActions from '../../store/actions/index';
 
 
 class BurgerBuilder extends Component {
@@ -108,14 +108,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdd: (ingredientName, totalPrice) => dispatch({
-            type: burgerBuilderActions.addIngredient(ingredientName),
-
-        }),
-        onIngredientDelete: (ingredientName, totalPrice) => dispatch({
-            type: burgerBuilderActions.deleteIngredient(ingredientName),
-
-        })
+        onIngredientAdd: ingredientName => dispatch(burgerBuilderActions.addIngredient(ingredientName)),
+        onIngredientDelete: ingredientName => dispatch(burgerBuilderActions.deleteIngredient(ingredientName))
     }
 
 };

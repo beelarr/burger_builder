@@ -25,18 +25,18 @@ const reducer = (state = initialState, action) => {
                 ...state,   // doesn't create a deep clone ie. ingredients object points to whatever state is.
                 ingredients: {
                     ...state.ingredients,
-                    [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] + 1
+                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
                 },
-                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.payload.ingredientName]
+                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
             };
         case actionTypes.DELETE_INGREDIENT:
             return {
                 ...state,
                 ingredients: {
                     ...state.ingredients,
-                    [action.payload.ingredientName]: state.ingredients[action.payload.ingredientName] - 1
+                    [action.ingredientName]: state.ingredients[action.ingredientName] - 1
                 },
-                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.payload.ingredientName]
+                totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
 
             };
         default:
