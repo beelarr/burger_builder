@@ -183,6 +183,8 @@ class CheckoutData extends Component {
                                 elementConfig={element.config.elementConfig}
                                 value={element.config.elementConfig.placeholder}
                                 changed={event => this.inputChangeHandler(event, element.id)}
+                                shouldValidate={element.config.validation}
+                                invalid={!element.config.valid}
                             />
                         ))}
                         <br/>
