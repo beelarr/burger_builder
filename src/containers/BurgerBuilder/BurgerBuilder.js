@@ -17,7 +17,6 @@ import * as actionTypes from '../../store/actions';
 class BurgerBuilder extends Component {
 
     state = {
-        toBePurchased: false,
         showModal: false,
         loading: false,
         error: false
@@ -32,7 +31,7 @@ class BurgerBuilder extends Component {
     updateToBePurchased = (ingredients) => {
         const sum = Object.keys(ingredients)
             .map( key => ingredients[key] ).reduce((sum, value) => sum + value, 0);
-        this.setState({toBePurchased: sum > 0})
+        return sum > 0
 
     };
 
@@ -84,7 +83,7 @@ class BurgerBuilder extends Component {
                         addIngredient={this.props.onIngredientAdd}
                         removeIngredient={this.props.onIngredientDelete}
                         disabled={disabledInfo}
-                        toBePurchased={this.state.toBePurchased}
+                        toBePurchased={this.updateToBePurchased(this.props.burgerContent)}
                         showModal={this.showModal}
                     />
                 </Aux>
