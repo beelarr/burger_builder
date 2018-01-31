@@ -1,12 +1,12 @@
 import * as actionTypes from './actions';
 
 
-const initalState = {
+const initialState = {
     ingredients: {},
     totalPrice: 1
 };
 
-const reducer = (state = initalState, action) => {
+const reducer = (state = initialState, action) => {
 
 }
 
