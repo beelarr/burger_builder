@@ -134,7 +134,6 @@ class CheckoutData extends Component {
 
             axios.post('/orders.json', order)
                 .then(data => {
-                    console.log(data);
                     this.setState({loading:false});
                     this.props.history.push('/')
                 })
