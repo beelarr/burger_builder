@@ -20,7 +20,8 @@ class CheckoutData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false,
             },
 
             address: {
@@ -33,7 +34,8 @@ class CheckoutData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false,
 
             },
             city: {
@@ -46,7 +48,8 @@ class CheckoutData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false,
             },
             zip_code: {
                 elementType: 'input',
@@ -60,7 +63,8 @@ class CheckoutData extends Component {
                     minLength: 5,
                     maxLength: 5
                 },
-                valid: false
+                valid: false,
+                touched: false,
             },
             state: {
                 elementType: 'input',
@@ -72,7 +76,8 @@ class CheckoutData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false,
             },
             email: {
                 elementType: 'email',
@@ -84,7 +89,8 @@ class CheckoutData extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false,
             },
             delivery_method: {
                 elementType: 'select',
@@ -149,10 +155,12 @@ class CheckoutData extends Component {
     };
 
     inputChangeHandler = (event, inputIdentifier) =>{
+
         const updateForm = { ...this.state.orderForm };
         const updateFormElement = { ...updateForm[inputIdentifier] };
         updateFormElement.value = event.target.value;
         updateFormElement.valid = this.validationCheck(updateFormElement.value, updateFormElement.validation);
+        updateFormElement.touched = true;
         updateForm[inputIdentifier] = updateFormElement;
         console.log('updated form element', updateFormElement);
         this.setState({orderForm: updateForm})
@@ -185,6 +193,7 @@ class CheckoutData extends Component {
                                 changed={event => this.inputChangeHandler(event, element.id)}
                                 shouldValidate={element.config.validation}
                                 invalid={!element.config.valid}
+                                touched={element.config.touched}
                             />
                         ))}
                         <br/>
