@@ -110,6 +110,7 @@ class CheckoutData extends Component {
             },
         },
         loading: false,
+        formIsValid: false
     };
 
     orderHandler = (e) => {
@@ -162,8 +163,13 @@ class CheckoutData extends Component {
         updateFormElement.valid = this.validationCheck(updateFormElement.value, updateFormElement.validation);
         updateFormElement.touched = true;
         updateForm[inputIdentifier] = updateFormElement;
-        console.log('updated form element', updateFormElement);
-        this.setState({orderForm: updateForm})
+
+        let formIsValid = true;
+        for (let key in updateForm) {
+            formIsValid = updateForm[key].valid && formIsValid  //checks if state.valid and the current form key are valid
+        }
+
+        this.setState({orderForm: updateForm, formIsValid: formIsValid})
     };
 
 
@@ -197,7 +203,7 @@ class CheckoutData extends Component {
                             />
                         ))}
                         <br/>
-                        <Button btnType="Success">ORDER</Button>
+                        <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
                     </form>
 
                 )}
