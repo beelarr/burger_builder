@@ -106,6 +106,7 @@ class CheckoutData extends Component {
                             value: 'free', displayValue: 'Free'
                         }]
                 },
+                valid: true
 
             },
         },
