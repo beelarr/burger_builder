@@ -46,18 +46,7 @@ class BurgerBuilder extends Component {
     };
 
     continuePurchase = () => {
-        const queryParams = [];
-        for (let i in this.props.burgerContent){
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.burgerContent[i]))
-        }
-        queryParams.push('price=' + this.props.price);
-        const queryString = queryParams.join('&');
-
-        this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryString
-
-        });
+        this.props.history.push('/checkout');
     };
 
     render() {
@@ -96,7 +85,7 @@ class BurgerBuilder extends Component {
             <Aux>
                 <Modal show={this.state.showModal} closeModal={this.closeModal}>
 
-                    { this.state.loading || !this.props.burgerContent ? <Spinner /> : (
+                    { this.state.loading ? <Spinner /> : (
                     <OrderSummary
                         ingredients={this.props.burgerContent}
                         cancel={this.closeModal}
@@ -141,4 +130,4 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default connect(mapDispatchToProps, mapStateToProps)(withErrorHandler(BurgerBuilder, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));

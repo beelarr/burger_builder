@@ -6,6 +6,8 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 
 import Input from '../../../components/UI/Input/Input';
 
+import { connect } from 'react-redux';
+
 
 class CheckoutData extends Component {
     state = {
@@ -125,7 +127,7 @@ class CheckoutData extends Component {
             formData[key] = this.state.orderForm[key].value
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.burgerContent,
             price: this.props.price,
             orderData: formData
         };
@@ -216,4 +218,12 @@ class CheckoutData extends Component {
     }
 }
 
-export default CheckoutData;
+const mapStateToProps = state => {
+    return {
+        burgerContent: state.ingredients,
+        price: state.totalPrice
+    }
+};
+
+
+export default connect(mapStateToProps)(CheckoutData);
