@@ -21,7 +21,7 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount () {
-
+        this.props.onInitFetchIngredients()
     };
 
     updateToBePurchased = (ingredients) => {
@@ -55,7 +55,7 @@ class BurgerBuilder extends Component {
             //sets this version of state from a number to true or false for disabling buttons
         }
 
-        let burger = this.state.error ? `Ingredient can't be loaded because of: ${this.state.error}` : <Spinner/>;
+        let burger = this.props.error ? `Ingredient can't be loaded because of: ${this.props.error}` : <Spinner/>;
 
         if (this.props.burgerContent)
             burger = (
@@ -97,14 +97,17 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
   return {
       burgerContent: state.ingredients,
-      price: state.totalPrice
+      price: state.totalPrice,
+      error: state.error
+
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         onIngredientAdd: ingredientName => dispatch(burgerBuilderActions.addIngredient(ingredientName)),
-        onIngredientDelete: ingredientName => dispatch(burgerBuilderActions.deleteIngredient(ingredientName))
+        onIngredientDelete: ingredientName => dispatch(burgerBuilderActions.deleteIngredient(ingredientName)),
+        onInitFetchIngredients: () => dispatch(burgerBuilderActions.initIngredients())
     }
 
 };
