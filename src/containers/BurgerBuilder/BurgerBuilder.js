@@ -20,6 +20,10 @@ class BurgerBuilder extends Component {
 
     };
 
+    componentWillMount() {
+        console.log('burgerContent', this.props.burgerContent);
+    }
+
     componentDidMount () {
         this.props.onInitFetchIngredients()
     };
