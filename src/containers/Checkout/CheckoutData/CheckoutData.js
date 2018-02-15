@@ -116,7 +116,6 @@ class CheckoutData extends Component {
 
             },
         },
-        loading: false,
         formIsValid: false
     };
 
@@ -177,13 +176,12 @@ class CheckoutData extends Component {
                 config: this.state.orderForm[key]
             })
         }
-        console.log('formElementArray', formElementArray);
 
         return (
             <div className={styles.ContactData}>
                 <h4>Enter Your Contact Info</h4>
                 <hr/>
-                {this.state.loading ? <Spinner/> : (
+                {this.props.loading ? <Spinner/> : (
                     <form onSubmit={this.orderHandler}>
                         {formElementArray.map(element => (
                             <Input
@@ -211,13 +209,16 @@ class CheckoutData extends Component {
 const mapStateToProps = state => {
     return {
         burgerContent: state.ingredients,
-        price: state.totalPrice
+        price: state.totalPrice,
+        loading: state.loading
     }
 };
 
 const mapDispatchToProps = dispatch => {
-    onBurgerOrder: orderData => dispatch(actions.purchaseBurgerStart(orderData))
-}
+    return {
+        onBurgerOrder: orderData => dispatch(actions.purchasingBurger(orderData))
+    }
+};
 
 
-export default connect(mapStateToProps)(withErrorHandler(CheckoutData, axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(CheckoutData, axios));
