@@ -10,7 +10,7 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
 import { connect } from 'react-redux';
-import * as burgerBuilderActions from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 
 
 class BurgerBuilder extends Component {
@@ -46,6 +46,7 @@ class BurgerBuilder extends Component {
     };
 
     continuePurchase = () => {
+        this.props.onInitPurchase();
         this.props.history.push('/checkout');
     };
 
@@ -100,18 +101,19 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-      burgerContent: state.ingredients,
-      price: state.totalPrice,
-      error: state.error
+      burgerContent: state.burgerBuilder.ingredients,
+      price: state.burgerBuilder.totalPrice,
+      error: state.burgerBuilder.error
 
   }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdd: ingredientName => dispatch(burgerBuilderActions.addIngredient(ingredientName)),
-        onIngredientDelete: ingredientName => dispatch(burgerBuilderActions.deleteIngredient(ingredientName)),
-        onInitFetchIngredients: () => dispatch(burgerBuilderActions.initIngredients())
+        onIngredientAdd: ingredientName => dispatch(actions.addIngredient(ingredientName)),
+        onIngredientDelete: ingredientName => dispatch(actions.deleteIngredient(ingredientName)),
+        onInitFetchIngredients: () => dispatch(actions.initIngredients()),
+        onInitPurchase: () => dispatch(actions.purchaseInit())
     }
 
 };
