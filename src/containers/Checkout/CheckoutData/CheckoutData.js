@@ -131,17 +131,6 @@ class CheckoutData extends Component {
             price: this.props.price,
             orderData: formData
         };
-
-            axios.post('/orders.json', order)
-                .then(data => {
-                    this.setState({loading:false});
-                    this.props.history.push('/')
-                })
-                .catch(error => {
-                    alert(`Nope, that didn't work.  We think it was ${error.message}`);
-                    this.setState({loading:false})
-
-                })
     };
 
     validationCheck = (value, rules) => {

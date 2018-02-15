@@ -34,7 +34,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
                         show={this.state.error}
                         closeModal={this.errorConfirmed}
                     >
-                        It's broke. . . 😵. Probably something to do with:
+                        It's broke. . . <span role='img' aria-label="It's dead">😵</span>. Probably something to do with:
                         {this.state.error ? this.state.error.message : null}
                     </Modal>
                     <WrappedComponent {...this.props} />
