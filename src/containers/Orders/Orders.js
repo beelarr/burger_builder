@@ -31,14 +31,14 @@ class Orders extends Component {
 
 }
 
-mapStateToProps = state => {
+const mapStateToProps = state => {
     return {
         orders: state.order.orders,
         loading: state.order.loading
     }
 };
 
-mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return {
         onFetchOrders: () => dispatch(actions.fetchOrders())
     }
