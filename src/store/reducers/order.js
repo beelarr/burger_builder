@@ -11,9 +11,9 @@ const initialState ={
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.PURCHASE_INIT:
-            return updateObject(state, { purchased: true })
+            return updateObject(state, { purchased: true });
         case actionTypes.PURCHASING_BURGER:
-            return updateObject(state, { loading: true })
+            return updateObject(state, { loading: true });
         case actionTypes.PURCHASE_BURGER_SUCCESS:
             const newOrder = updateObject(action.orderData, {id: action.orderId});
             return updateObject(state, {
